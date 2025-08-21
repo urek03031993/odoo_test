@@ -1,0 +1,23 @@
+/* Form */
+.field_icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.da_row {
+    display: flex;
+    align-items: stretch;
+}
+
+/* List */
+.o_list_field_cell {
+    display: flex;
+    align-items: center;
+}
+
+.o_list_field_cell .field_icon {
+    margin-right: 8px;
+    flex-shrink: 0;
+}

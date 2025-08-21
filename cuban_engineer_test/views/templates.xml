@@ -1,0 +1,60 @@
+<odoo>
+    <data>
+        <template id="customers" name="Customers">
+            <t t-call="website.layout">
+                <div class="container">
+                    <h1>Customers</h1>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6 offset-md-3">
+                            <form method="get">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="search"
+                                            placeholder="Search by name or social network" t-att-value="search"
+                                            style="margin-right: 1rem;"/>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="submit">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <t t-foreach="partners" t-as="partner">
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title" t-esc="partner.name"/>
+                                        <p class="card-text" t-esc="partner.comment or ''"/>
+
+                                        <div class="social-links">
+                                            <t t-if="partner.facebook_url">
+                                                <a t-att-href="partner.facebook_url" target="_blank" class="social-link">
+                                                    <img src="/cuban_engineer_test/static/src/img/facebook-48.png"
+                                                         alt="Facebook" class="social-icon"/>
+                                                </a>
+                                            </t>
+                                            <t t-if="partner.linkedin_url">
+                                                <a t-att-href="partner.linkedin_url" target="_blank" class="social-link">
+                                                    <img src="/cuban_engineer_test/static/src/img/linkedin-48.png"
+                                                         alt="LinkedIn" class="social-icon"/>
+                                                </a>
+                                            </t>
+                                            <t t-if="partner.x_url">
+                                                <a t-att-href="partner.x_url" target="_blank" class="social-link">
+                                                    <img src="/cuban_engineer_test/static/src/img/twitterx-50.png"
+                                                         alt="TwitterX" class="social-icon"/>
+                                                </a>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

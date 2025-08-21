@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!--    Falta ponerle la foto a todas las vistas del perfil completo-->
+
+    <record id="view_form_partner_social" model="ir.ui.view">
+        <field name="name">form.res.partner.social</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="complete_profile" widget="boolean_favorite"/>
+            </xpath>
+
+            <xpath expr="//page[@name='internal_notes']" position="after">
+                <page string="Redes Sociales" name="social_media">
+                    <group>
+                        <group string="Redes Sociales">
+                            <div class="lines">
+                                <div class="da_row">
+                                    <img src="/cuban_engineer_test/static/src/img/facebook-48.png"
+                                            alt="Facebook"
+                                            class="field_icon"/>
+                                    <label for="facebook_url" string="Facebook: "/>
+                                    <field name="facebook_url" widget="url"/>
+                                </div>
+
+                                <div class="da_row">
+                                    <img src="/cuban_engineer_test/static/src/img/linkedin-48.png"
+                                            alt="LinkedIn"
+                                            class="field_icon"/>
+                                    <label for="linkedin_url" string="Linkedin: "/>
+                                    <field name="linkedin_url" widget="url"/>
+                                </div>
+
+                                <div class="da_row">
+                                    <img src="/cuban_engineer_test/static/src/img/twitterx-50.png"
+                                            alt="TwitterX"
+                                            class="field_icon"/>
+                                    <label for="x_url" string="TwitterX: "/>
+                                    <field name="x_url" widget="url"/>
+                                </div>
+                            </div>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_list_partner_social" model="ir.ui.view">
+        <field name="name">list.res.partner.social</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="complete_profile" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_kanban_partner_social" model="ir.ui.view">
+        <field name="name">kanban.res.partner.social</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//footer/div" position="inside">
+                <t t-if="record.complete_profile">
+                    <a  class="btn btn-sm btn-link smaller"
+                        name="complete_profile_button"
+                        role="button">
+                        <i class="fa fa-check me-1" aria-label="Complete Profile" role="img" title="Complete Profile"/>
+                        <field name="complete_profile"/>
+                    </a>
+                </t>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="view_filter_partner_social" model="ir.ui.view">
+        <field name="name">filter.res.partner.social</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//filter[@name='inactive']" position="after">
+                <separator/>
+                <field name="complete_profile"/>
+                <filter string="Perfil Completo" name="complete_profile"
+                        domain="[('complete_profile', '=', True)]"/>
+                <filter string="Perfil Incompleto" name="incomplete_profile"
+                        domain="[('complete_profile', '=', False)]"/>
+                <separator/>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>
+
